@@ -1,1 +1,2 @@
-<p>sign-in works!</p>
+<input type="email" class="input" [(ngModel)]="email">
+<button *ngIf="!emailSent || email" (click)="sendEmailLink()">Send Login Link </button>
