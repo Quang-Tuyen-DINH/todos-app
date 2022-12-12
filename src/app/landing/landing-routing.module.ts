@@ -4,7 +4,8 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { LandingPageComponent } from './container/landing-page.component';
 
 const routes: Routes = [
-  { path: '', component: SignInComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+  { path: 'welcome', component: SignInComponent },
   { path: 'landing', component: LandingPageComponent }
 ];
 

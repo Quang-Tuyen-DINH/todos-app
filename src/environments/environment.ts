@@ -9,7 +9,7 @@ export const environment = {
     appId: "1:394508392163:web:bc7bca066fa9e74ec697d6"
   },
   actionCodeSettings: {
-    url: 'https://localhost:4200/landing', 
+    url: 'http://localhost:4200/landing', 
     handleCodeInApp: true,
   }
 };
