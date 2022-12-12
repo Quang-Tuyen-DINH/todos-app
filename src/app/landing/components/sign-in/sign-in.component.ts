@@ -1,5 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,24 +10,47 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignInComponent implements OnInit {
   email: string;
-  emailSent = false;
-  error = null;
+  emailForm: FormGroup;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.createEmailForm();
+  }
+
+  createEmailForm() {
+    this.emailForm = this.fb.group({
+      email: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
+        ]
+      ]
+    })
+  }
 
   signIn() {
-    this.emailSent = false;
-    this.error = null;
-    this.authService.signIn(this.email)
+    this.authService.signIn(this.emailForm.controls["email"].value)
       .then(() => {
-        this.emailSent = true;
+        this.toastr.success(
+          "Login link has been sent to " + this.emailForm.controls["email"].value
+        )
       })
       .catch((error) => {
-        this.error = error;
+        this.toastr.error(
+          error
+        )
       });
+
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.emailForm.reset();
   }
 }

@@ -1,5 +1,26 @@
-<input type="email" class="input" [(ngModel)]="email">
-<button *ngIf="!emailSent || email" (click)="signIn()">Send Login Link </button>
+<form [formGroup]="emailForm">
+  <input
+    type="email"
+    formControlName="email"
+    required
+  />
+  <div>
+    <button
+      type="button"
+      class="btn btn-secondary gap-right"
+      (click)="resetForm()"
+    >
+      Clear
+    </button>
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="!emailForm.valid"
+      (click)="signIn()"
+    >
+      Sign in
+    </button>
+  </div>
+</form>
 
-<div>Capcha</div>
-<div>Sign up</div>
+<app-sign-up></app-sign-up>

@@ -3,6 +3,7 @@ export const environment = {
   firebaseConfig: {
     apiKey: "AIzaSyBarqee36KFSHFJTV4S-EtDzlPDO-ruqSQ",
     authDomain: "pono-todos.firebaseapp.com",
+    databaseURL: "https://pono-todos-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "pono-todos",
     storageBucket: "pono-todos.appspot.com",
     messagingSenderId: "394508392163",

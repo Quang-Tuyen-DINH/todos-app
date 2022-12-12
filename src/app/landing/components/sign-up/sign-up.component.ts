@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { UsersService } from '../../shared/services/users/users.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -6,11 +9,54 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit{
-  constructor() {
+  userForm: FormGroup;
 
-  }
+  constructor(
+    private usersApi: UsersService,
+    private fb: FormBuilder,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
+    this.usersApi.getUsersList();
+    this.createUserForm();
+  }
 
+  createUserForm() {
+    this.userForm = this.fb.group({
+      email: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
+        ]
+      ],
+      firstName: ["", [Validators.required]],
+      lastName: ["", [Validators.required]]
+    })
+  }
+
+  // get email() {
+  //   return this.userForm.get("email");
+  // }
+
+  // get firstName() {
+  //   return this.userForm.get("firstName");
+  // }
+
+  // get lastName() {
+  //   return this.userForm.get("lastName");
+  // }
+
+  resetForm() {
+    this.userForm.reset();
+  }
+
+  submitUserData() {
+    this.usersApi.addUser(this.userForm.value);
+    this.toastr.success(
+      this.userForm.controls["firstName"].value + " successfully signed up!"
+    )
+    this.resetForm();
   }
 }

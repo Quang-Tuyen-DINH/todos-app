@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/landing/services/auth.service';
+import { AuthService } from 'src/app/landing/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-todos',
