@@ -21,10 +21,14 @@ export class AppComponent implements OnInit {
   initializeApp() {
     this.authService.getAuthState().subscribe((auth) => {
       if(!auth) {
-        if(this.router.url.split('?')[0] === "/welcome") {
+        if(this.router.url.split("?")[0] === "/welcome" || this.router.url.split("?")[0] === "/landing") {
           return;
         }
-        this.router.navigate(['']);
+        this.router.navigate([""]);
+      } else {
+        if(this.router.url.split("?")[0] === "/welcome" || this.router.url.split("?")[0] === "/landing") {
+          this.router.navigate(["/todos"]);
+        }
       }
     });
   }

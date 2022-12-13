@@ -36,27 +36,24 @@ export class SignUpComponent implements OnInit{
     })
   }
 
-  // get email() {
-  //   return this.userForm.get("email");
-  // }
-
-  // get firstName() {
-  //   return this.userForm.get("firstName");
-  // }
-
-  // get lastName() {
-  //   return this.userForm.get("lastName");
-  // }
-
   resetForm() {
     this.userForm.reset();
   }
 
   submitUserData() {
-    this.usersApi.addUser(this.userForm.value);
-    this.toastr.success(
-      this.userForm.controls["firstName"].value + " successfully signed up!"
-    )
-    this.resetForm();
+    return this.usersApi.checkRegistered(this.userForm.controls["email"].value).then(() => {
+      if(this.usersApi.registeredEmail) {
+        this.toastr.error(
+          this.userForm.controls["email"].value + " has been registered"
+        )
+        this.resetForm();
+      } else {
+        this.usersApi.addUser(this.userForm.value);
+        this.toastr.success(
+          this.userForm.controls["firstName"].value + " successfully signed up!"
+        )
+        this.resetForm();
+      }
+    })
   }
 }

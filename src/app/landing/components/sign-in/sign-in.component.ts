@@ -36,11 +36,7 @@ export class SignInComponent implements OnInit {
 
   signIn() {
     this.authService.signIn(this.emailForm.controls["email"].value)
-      .then(() => {
-        this.toastr.success(
-          "Login link has been sent to " + this.emailForm.controls["email"].value
-        )
-      })
+      .then(() => {})
       .catch((error) => {
         this.toastr.error(
           error

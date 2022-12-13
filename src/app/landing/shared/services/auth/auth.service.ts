@@ -24,7 +24,10 @@ export class AuthService {
         )
       } else {
         const actionCodeSettings = { ...environment.actionCodeSettings };
-        return this.afAuth.sendSignInLinkToEmail(email, actionCodeSettings);
+        this.afAuth.sendSignInLinkToEmail(email, actionCodeSettings);
+        return this.toastr.success(
+          "Login link has been sent to " + email
+        )
       }
     })
   }
