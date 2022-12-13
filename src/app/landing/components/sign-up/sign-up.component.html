@@ -1,1 +1,37 @@
-<p>sign-up works!</p>
+<form [formGroup]="userForm">
+  <div>
+    <input
+      type="email"
+      formControlName="email"
+      required
+    />
+    <input
+      type="text"
+      formControlName="firstName"
+      required
+    />
+    <input
+      type="text"
+      formControlName="lastName"
+      required
+    />
+  </div>
+  <div>
+    <button
+      type="button"
+      (click)="resetForm()"
+    >
+      Clear
+    </button>
+    <button
+      type="button"
+      [disabled]="!userForm.valid"
+      (click)="submitUserData()"
+    >
+      Sign up
+    </button>
+  </div>
+</form>
+
+<div>Capcha</div>
+<div>Sign up</div>

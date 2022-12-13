@@ -1,1 +1,2 @@
-<p>landing-page works!</p>
+<input type="email" class="input" [(ngModel)]="email">
+<button *ngIf="email" (click)="confirmSignIn()">Confirm Email</button>
