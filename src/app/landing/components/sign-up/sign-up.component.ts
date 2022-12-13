@@ -18,7 +18,6 @@ export class SignUpComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.usersApi.getUsersList();
     this.createUserForm();
   }
 
