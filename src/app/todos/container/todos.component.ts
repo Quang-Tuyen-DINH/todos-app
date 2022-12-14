@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/landing/shared/services/auth/auth.service';
 import { Task } from '../shared/models/task.model';
@@ -14,6 +15,7 @@ export class TodosComponent implements OnInit, OnDestroy {
   tasksList: Task[] = []
 
   constructor(
+    public router: Router,
     private tasksService: TasksService,
     private authService: AuthService
   ) { }
@@ -34,6 +36,10 @@ export class TodosComponent implements OnInit, OnDestroy {
         }
       })
     )
+  }
+
+  refreshList() {
+    window.location.reload();
   }
 
   signOut() {

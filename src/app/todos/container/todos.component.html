@@ -1,3 +1,3 @@
 <button (click)="signOut()">Sign out</button>
 <app-create-task (addedNewTask)="getTasksList()"></app-create-task>
-<app-tasks-list [tasksList]="tasksList" (refreshList)="getTasksList()"></app-tasks-list>
+<app-tasks-list [tasksList]="tasksList" (refreshList)="getTasksList(); refreshList()"></app-tasks-list>
