@@ -12,7 +12,7 @@ export class SignUpComponent implements OnInit{
   userForm: FormGroup;
 
   constructor(
-    private usersApi: UsersService,
+    private usersService: UsersService,
     private fb: FormBuilder,
     private toastr: ToastrService
   ) { }
@@ -30,8 +30,14 @@ export class SignUpComponent implements OnInit{
           Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
         ]
       ],
-      firstName: ["", [Validators.required]],
-      lastName: ["", [Validators.required]]
+      firstName: ["", [
+        Validators.required,
+        Validators.pattern("[a-zA-Z][a-zA-Z ]+")
+      ]],
+      lastName: ["", [
+        Validators.required,
+        Validators.pattern("[a-zA-Z][a-zA-Z ]+")
+      ]]
     })
   }
 
@@ -40,17 +46,14 @@ export class SignUpComponent implements OnInit{
   }
 
   submitUserData() {
-    return this.usersApi.checkRegistered(this.userForm.controls["email"].value).then(() => {
-      if(this.usersApi.registeredEmail) {
+    return this.usersService.checkRegistered(this.userForm.controls["email"].value).then(() => {
+      if(this.usersService.registeredEmail) {
         this.toastr.error(
           this.userForm.controls["email"].value + " has been registered"
         )
         this.resetForm();
       } else {
-        this.usersApi.addUser(this.userForm.value);
-        this.toastr.success(
-          this.userForm.controls["firstName"].value + " successfully signed up!"
-        )
+        this.usersService.addUser(this.userForm.value);
         this.resetForm();
       }
     })

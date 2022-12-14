@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../shared/services/auth/auth.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class LandingPageComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +27,12 @@ export class LandingPageComponent {
     this.error = null;
     this.authService.confirmSignIn(this.email, this.url)
     .then(
-      () => this.router.navigate(['/todos'])
+      () => {
+        this.router.navigate(['/todos']);
+        this.toastr.success(
+          "You signed in successfully!"
+        )
+      }
     )
     .catch((error) => {
       this.error = error;

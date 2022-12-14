@@ -1,15 +1,29 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="taskForm">
   <input
     type="text"
     placeholder="Title"
-    formControlName="taskTitle"
+    formControlName="title"
     required
   />
   <input
     type="text"
     placeholder="Content"
-    formControlName="taskContent"
+    formControlName="content"
     required
   />
-  <button type="submit">Add</button>
+  <div>
+    <button
+      type="button"
+      (click)="resetForm()"
+    >
+      Clear
+    </button>
+    <button
+      type="button"
+      [disabled]="!taskForm.valid"
+      (click)="submitTask()"
+    >
+      Add
+    </button>
+  </div>
 </form>
