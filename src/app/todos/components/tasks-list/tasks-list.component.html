@@ -1,1 +1,5 @@
-<p>tasks-list works!</p>
+<ng-container>
+  <div *ngFor="let task of tasksList">
+    <app-task [task]="task" (updatedTask)="refresh()" (removedTask)="refresh()"></app-task>
+  </div>
+</ng-container>

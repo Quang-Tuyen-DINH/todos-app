@@ -10,15 +10,25 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class AuthService {
+  private _loggedInEmail: string;
+
+  get loggedInEmail(): string {
+    return this._loggedInEmail;
+  }
+
+  set loggedInEmail(email: string) {
+    this._loggedInEmail = email;
+  }
+
   constructor(
     private afAuth: AngularFireAuth,
-    private usersApi: UsersService,
+    private usersService: UsersService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
-  public signIn(email: string): Promise<any> {
-    return this.usersApi.checkRegistered(email).then(() => {
-      if(!this.usersApi.registeredEmail) {
+  signIn(email: string): Promise<any> {
+    return this.usersService.checkRegistered(email).then(() => {
+      if(!this.usersService.registeredEmail) {
         this.toastr.error(
           email + " has not been registered"
         )
@@ -32,19 +42,29 @@ export class AuthService {
     })
   }
 
-  public confirmSignIn(email: string, url: string): Promise<any> {
-    return this.afAuth.signInWithEmailLink(email, url);
+  confirmSignIn(email: string, url: string): Promise<any> {
+    this.setLoggedInEmail(email);
+    return this.afAuth.signInWithEmailLink(email, url)
   }
 
-  public signOut() {
+  setLoggedInEmail(email: string) {
+    this.loggedInEmail = email;
+  }
+
+  signOut() {
     const auth = getAuth();
 
     signOut(auth)
-      .then(() => {})
+      .then(() => {
+        this.loggedInEmail = "";
+        this.toastr.success(
+          "You signed out successfully!"
+        );
+      })
       .catch((error) => {})
   }
 
-  public getAuthState(): Observable<any> {
+  getAuthState(): Observable<any> {
     return this.afAuth.authState;
   }
 }
