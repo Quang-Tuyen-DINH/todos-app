@@ -1,1 +1,59 @@
-<p>sign-in works!</p>
+<div class="signin-form-container">
+  <mat-stepper [linear]="false" #stepper>
+    <mat-step label="Sign in">
+      <form [formGroup]="emailForm">
+        <mat-form-field class="signin-form">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            required
+          />
+          <mat-hint>Enter your sign in email</mat-hint>
+          <mat-error *ngIf="emailForm.hasError('email') && !emailForm.hasError('required')">
+            Please enter your email
+          </mat-error>
+          <mat-error *ngIf="emailForm.hasError('email')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <div class="signin-form-buttons">
+        <button
+          type="button"
+          class="clear-button"
+          mat-stroked-button
+          (click)="resetForm()"
+        >
+          Clear
+        </button>
+        <button
+          type="submit"
+          class="signin-button"
+          mat-stroked-button color="accent"
+          [disabled]="!emailForm.valid"
+          (click)="signIn()"
+        >
+          Sign in
+        </button>
+        <button
+          mat-button
+          matStepperNext
+          mat-stroked-button color="primary"
+        >
+          Sign up ?
+        </button>
+      </div>
+    </mat-step>
+    <mat-step label="Sign up">
+      <app-sign-up></app-sign-up>
+      <div>
+        <button mat-button matStepperPrevious>Registered ? Sign in !</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>
+
+

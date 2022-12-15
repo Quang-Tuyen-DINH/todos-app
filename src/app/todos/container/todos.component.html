@@ -1,3 +1,18 @@
-<app-create-task></app-create-task>
-<app-tasks-list></app-tasks-list>
-<div>TEST</div>
+<div class="todos-container">
+  <div class="nav-bar">
+    <button
+      mat-stroked-button color="accent"
+      class="sign-out"
+      (click)="signOut()">
+      Sign out
+    </button>
+  </div>
+  <div class="header">
+    <span class="title">Todos</span>
+  </div>
+  <div class="body">
+    <app-create-task (addedNewTask)="getTasksList()"></app-create-task>
+    <mat-divider class="divider"></mat-divider>
+    <app-tasks-list [tasksList]="tasksList" (refreshList)="getTasksList(); refreshList()"></app-tasks-list>
+  </div>
+</div>
