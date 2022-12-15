@@ -1,2 +1,31 @@
-<input type="email" class="input" [(ngModel)]="email">
-<button *ngIf="email" (click)="confirmSignIn()">Confirm Email</button>
+<div class="landing-container">
+  <form [formGroup]="emailForm" class="confirm-email-form">
+    <mat-form-field class="signin-form">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        placeholder="Email"
+        formControlName="email"
+        required
+      />
+      <mat-hint>Confirm your sign in email</mat-hint>
+      <mat-error *ngIf="emailForm.hasError('email') && !emailForm.hasError('required')">
+        Please enter your email
+      </mat-error>
+      <mat-error *ngIf="emailForm.hasError('email')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <div class="signin-button">
+    <button
+      type="submit"
+      mat-stroked-button color="accent"
+      [disabled]="!emailForm.valid"
+      (click)="confirmSignIn()"
+    >
+      Confirm Email
+    </button>
+  </div>
+</div>

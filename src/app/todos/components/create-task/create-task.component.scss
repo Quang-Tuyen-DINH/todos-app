@@ -1,0 +1,37 @@
+.creation-form-container {
+  width: 100%;
+  margin: 25px;
+
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .title-form {
+      width: 350px;
+      margin: 0 50px 0 0;
+    }
+  
+    .content-form {
+      width: 350px;
+    }
+  }
+
+  .form-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0 0 0;
+
+    .clear-button {
+      margin: 0 50px 0 0;
+      padding: 25px;
+      width: 120px;
+    }
+
+    .add-button {
+      padding: 25px;
+      width: 120px;
+    }
+  }
+}
