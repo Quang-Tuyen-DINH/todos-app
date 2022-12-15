@@ -6,7 +6,10 @@ import { TasksListComponent } from './components/tasks-list/tasks-list.component
 import { TodosRoutingModule } from './todos-routing.module';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,11 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     TodosRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatInputModule,
   ]
 })
 export class TodosModule { }
