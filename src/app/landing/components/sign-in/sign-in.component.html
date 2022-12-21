@@ -46,6 +46,9 @@
           Sign up ?
         </button>
       </div>
+      <div *ngIf="confirmation" class="confirmation-reminder">
+        <span>Please check your Spam box</span>
+      </div>
     </mat-step>
     <mat-step label="Sign up">
       <app-sign-up></app-sign-up>
