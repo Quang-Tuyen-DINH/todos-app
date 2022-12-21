@@ -10,7 +10,7 @@ export const environment = {
     appId: "1:798921252726:web:e141caaf24cae6df16e457"
   },
   actionCodeSettings: {
-    url: 'https://todos-dinh.vercel.app/landing', 
+    url: 'http://localhost:4200/landing', 
     handleCodeInApp: true,
   }
 };

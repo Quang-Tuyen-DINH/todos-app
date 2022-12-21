@@ -11,6 +11,7 @@ import { AuthService } from '../../shared/services/auth/auth.service';
 export class SignInComponent implements OnInit {
   email: string;
   emailForm: FormGroup;
+  confirmation: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -36,7 +37,9 @@ export class SignInComponent implements OnInit {
 
   signIn() {
     this.authService.signIn(this.emailForm.controls["email"].value)
-      .then(() => {})
+      .then(() => {
+        this.confirmation = true;
+      })
       .catch((error) => {
         this.toastr.error(
           error
